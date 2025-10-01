@@ -41,7 +41,7 @@ Modern React TypeScript frontend for Toko Management System with comprehensive C
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/toko-web.git
+   git clone https://github.com/rizqyyourin/toko-web.git
    cd toko-web
    ```
 
