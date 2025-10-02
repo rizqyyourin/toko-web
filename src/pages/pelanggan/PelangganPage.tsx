@@ -4,9 +4,9 @@ import type { ColumnsType } from 'antd/es/table'
 import { PlusOutlined, EditOutlined, DeleteOutlined, UserOutlined, SearchOutlined, ReloadOutlined, DownloadOutlined } from '@ant-design/icons'
 import { useList } from '../../lib/hooks'
 import { api } from '../../lib/api'
-import { sanitizeInput, validateInput } from '../../lib/sanitize'
-import { useSearch } from '../../lib/useSearch'
-import { useExportCSV } from '../../lib/exportCSV'
+import { sanitizeInput, validateInput } from '../../utils/sanitize'
+import { useSearch } from '../../hooks/useSearch'
+import { useExportCSV } from '../../utils/exportCSV'
 import { PageHeader, DataTableActions, SearchBar, useResponsivePagination } from '../../components/common'
 import type { Pelanggan } from '../../types'
 
@@ -157,9 +157,35 @@ export default function PelangganPage() {
     }))
   }, [currentData])
 
+  // Generate next pelanggan ID
+  const generateNextPelangganId = (): string => {
+    if (!data || data.length === 0) return 'PELANGGAN_1'
+    
+    const existingNumbers = data
+      .filter(pelanggan => pelanggan.id_pelanggan.startsWith('PELANGGAN_'))
+      .map(pelanggan => {
+        const num = parseInt(pelanggan.id_pelanggan.replace('PELANGGAN_', ''), 10)
+        return isNaN(num) ? 0 : num
+      })
+      .filter(num => num > 0)
+    
+    if (existingNumbers.length === 0) return 'PELANGGAN_1'
+    
+    const maxNumber = Math.max(...existingNumbers)
+    return `PELANGGAN_${maxNumber + 1}`
+  }
+
   function onAdd() {
     setEditing(null)
     form.resetFields()
+    
+    // Auto-generate next pelanggan ID
+    const nextPelangganId = generateNextPelangganId()
+    form.setFieldsValue({ 
+      id_pelanggan: nextPelangganId,
+      jenis_kelamin: 'PRIA' // Set default value
+    })
+    
     setOpen(true)
   }
 
@@ -376,10 +402,10 @@ export default function PelangganPage() {
           initialValues={{ jenis_kelamin: 'PRIA' }}
           style={{ marginTop: 24 }}
         >
-          {!editing && (
+          {!editing ? (
             <Form.Item 
               name="id_pelanggan" 
-              label="ID Pelanggan" 
+              label="ID Pelanggan"
               rules={[
                 { required: true, message: 'ID Pelanggan wajib diisi' },
                 { pattern: /^PELANGGAN_\d+$/, message: 'Format ID harus PELANGGAN_XXX (contoh: PELANGGAN_1, PELANGGAN_10)' },
@@ -395,13 +421,27 @@ export default function PelangganPage() {
             >
               <Input 
                 placeholder="PELANGGAN_1" 
-                maxLength={20} 
+                maxLength={20}
                 onChange={(e) => {
                   // Real-time sanitization for ID
                   const sanitized = sanitizeInput.id(e.target.value)
                   if (sanitized !== e.target.value) {
                     form.setFieldsValue({ id_pelanggan: sanitized })
                   }
+                }}
+              />
+            </Form.Item>
+          ) : (
+            <Form.Item 
+              name="id_pelanggan" 
+              label="ID Pelanggan"
+            >
+              <Input 
+                readOnly
+                style={{ 
+                  backgroundColor: '#f5f5f5',
+                  color: '#666',
+                  cursor: 'not-allowed'
                 }}
               />
             </Form.Item>
