@@ -105,7 +105,3 @@ This project is licensed under the MIT License.
 - Built with [React](https://reactjs.org/) and [TypeScript](https://www.typescriptlang.org/)
 - UI components by [Ant Design](https://ant.design/)
 - Bundled with [Vite](https://vitejs.dev/)
-
----
-
-**Made with ❤️ for modern web development**
