@@ -102,11 +102,10 @@ export default function DashboardPage() {
                 borderRadius: 16,
                 height: '160px',
                 transition: 'all 0.3s ease',
-                cursor: 'pointer'
+                cursor: 'default'
               }}
               className="dashboard-card"
               bodyStyle={{ padding: '24px' }}
-              hoverable
             >
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '100%' }}>
                 <div style={{ flex: 1 }}>

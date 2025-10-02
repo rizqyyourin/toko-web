@@ -41,11 +41,21 @@ body {
 /* Dashboard card animations */
 .dashboard-card {
   transition: all 0.3s ease;
+  cursor: default !important;
 }
 
 .dashboard-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+  cursor: default !important;
+}
+
+/* Ensure all elements inside dashboard card have default cursor */
+.dashboard-card,
+.dashboard-card *,
+.dashboard-card:hover,
+.dashboard-card:hover * {
+  cursor: default !important;
 }
 
 /* Responsive utilities */
