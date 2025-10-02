@@ -60,9 +60,7 @@ export default function App() {
             fontSize: '20px',
             letterSpacing: '0.5px',
             cursor: 'pointer'
-          }}
-          className="header-logo"
-          >
+          }}>
             <Link to="/dashboard" style={{ color: '#fff', textDecoration: 'none' }}>
               🏪 Toko Web
             </Link>
@@ -89,7 +87,6 @@ export default function App() {
               type="text"
               icon={<MenuOutlined />}
               onClick={() => setMobileMenuOpen(true)}
-              className="mobile-menu-btn"
               style={{ color: '#fff', fontSize: '18px' }}
             />
           )}
@@ -125,9 +122,7 @@ export default function App() {
             padding: 24, 
             borderRadius: 8,
             boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
-          }}
-          className="page-transition"
-          >
+          }}>
             <Routes>
               <Route path="/" element={<Navigate to="/dashboard" replace />} />
               <Route path="/dashboard" element={<DashboardPage />} />

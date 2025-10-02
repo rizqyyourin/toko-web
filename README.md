@@ -2,31 +2,6 @@
 
 Modern React TypeScript frontend for Toko Management System with comprehensive CRUD operations and responsive design.
 
-## ✨ Features
-
-### 📊 **Dashboard**
-- Real-time statistics and overview
-- Interactive charts and metrics
-- Quick navigation to main features
-
-### 👥 **Pelanggan (Customer Management)**
-- Complete CRUD operations
-- Advanced search and filtering
-- Sortable data tables
-- Export to CSV functionality
-
-### 📦 **Barang (Product Management)**
-- Product catalog management
-- Category-based organization
-- Price and inventory tracking
-- Bulk operations support
-
-### 🛒 **Penjualan (Sales Management)**
-- Multi-item transaction support
-- Automatic subtotal calculation
-- Customer relationship linking
-- Transaction history tracking
-
 ## 🚀 Tech Stack
 
 - **Frontend Framework**: React 18 with TypeScript
@@ -73,12 +48,6 @@ The application is fully responsive and optimized for:
 - 📱 **Tablets** (768px - 992px)
 - 💻 **Desktop** (> 992px)
 
-### Mobile Features
-- Collapsible navigation drawer
-- Touch-friendly interface
-- Optimized table layouts
-- Adaptive button sizing
-
 ## 🔧 Configuration
 
 ### API Integration
@@ -115,21 +84,10 @@ src/
 └── types.ts             # TypeScript type definitions
 ```
 
-## 🎨 UI/UX Features
-
-- **Modern Design**: Clean and intuitive interface
-- **Consistent Styling**: Unified design system
-- **Interactive Elements**: Smooth animations and transitions
-- **Accessibility**: Keyboard navigation and screen reader support
-- **Performance**: Optimized rendering and lazy loading
-
 ## 📋 Available Scripts
 
 - `npm run dev` - Start development server
 - `npm run build` - Build for production
-- `npm run preview` - Preview production build
-- `npm run lint` - Run ESLint (if configured)
-- `npm run type-check` - TypeScript type checking
 
 ## 🔌 Backend Requirements
 
@@ -137,14 +95,6 @@ This frontend requires a Laravel backend API running on `http://localhost:8000` 
 - Customer management (`/api/pelanggan`)
 - Product management (`/api/barang`)
 - Sales transactions (`/api/penjualan`)
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
 
 ## 📄 License
 
