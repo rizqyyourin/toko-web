@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react'
-import { Card, Col, Row, Statistic, Typography, Spin, Space } from 'antd'
+import { Col, Row, Typography, Card, Space } from 'antd'
 import { UserOutlined, AppstoreOutlined, ShoppingCartOutlined, DollarOutlined } from '@ant-design/icons'
 import { useList } from '../../lib/hooks'
+import { StatCard } from '../../components/dashboard'
+import { LoadingSpinner } from '../../components/common'
+import { formatCurrency } from '../../utils'
 import type { Pelanggan, Barang, Penjualan } from '../../types'
 
 const { Title } = Typography
@@ -31,14 +34,6 @@ export default function DashboardPage() {
   }, [pelanggan.data, barang.data, penjualan.data])
 
   const isLoading = pelanggan.loading || barang.loading || penjualan.loading
-
-  const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('id-ID', {
-      style: 'currency',
-      currency: 'IDR',
-      minimumFractionDigits: 0
-    }).format(amount)
-  }
 
   const cardData = [
     {
@@ -74,10 +69,10 @@ export default function DashboardPage() {
 
   if (isLoading) {
     return (
-      <div style={{ textAlign: 'center', padding: '100px 0' }}>
-        <Spin size="large" />
-        <div style={{ marginTop: 16, color: '#666' }}>Memuat data dashboard...</div>
-      </div>
+      <LoadingSpinner 
+        size="large"
+        message="Memuat data dashboard..."
+      />
     )
   }
 
@@ -95,42 +90,18 @@ export default function DashboardPage() {
       <Row gutter={[24, 24]} style={{ marginBottom: 40 }}>
         {cardData.map((item, index) => (
           <Col xs={24} sm={12} lg={6} key={index}>
-            <Card
-              style={{
-                background: item.color,
-                border: `2px solid ${item.borderColor}`,
-                borderRadius: 16,
-                height: '160px',
-                transition: 'all 0.3s ease',
-                cursor: 'default'
-              }}
-              className="dashboard-card"
-              bodyStyle={{ padding: '24px' }}
-            >
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '100%' }}>
-                <div style={{ flex: 1 }}>
-                  <div style={{ color: '#666', fontSize: '14px', marginBottom: 12, fontWeight: 500 }}>
-                    {item.title}
-                  </div>
-                  <Statistic
-                    value={item.isMonetary ? stats.totalRevenue : item.value}
-                    valueStyle={{ 
-                      fontSize: item.isMonetary ? '20px' : '28px',
-                      fontWeight: 'bold',
-                      color: '#262626',
-                      lineHeight: 1.2
-                    }}
-                    formatter={item.isMonetary ? 
-                      (value) => formatCurrency(Number(value)) : 
-                      undefined
-                    }
-                  />
-                </div>
-                <div style={{ marginLeft: 20 }}>
-                  {item.icon}
-                </div>
-              </div>
-            </Card>
+            <StatCard
+              title={item.title}
+              value={item.isMonetary ? stats.totalRevenue : item.value}
+              icon={item.icon}
+              color={item.color}
+              borderColor={item.borderColor}
+              isMonetary={item.isMonetary}
+              formatter={item.isMonetary ? 
+                (value: any) => formatCurrency(Number(value)) : 
+                undefined
+              }
+            />
           </Col>
         ))}
       </Row>

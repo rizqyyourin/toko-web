@@ -11,9 +11,9 @@ import {
 } from '@ant-design/icons'
 import { useList } from '../../lib/hooks'
 import { api } from '../../lib/api'
-import { useSearch } from '../../lib/useSearch'
-import { useExportCSV } from '../../lib/exportCSV'
-import { sanitizeInput } from '../../lib/sanitize'
+import { useSearch } from '../../hooks/useSearch'
+import { useExportCSV } from '../../utils/exportCSV'
+import { sanitizeInput } from '../../utils/sanitize'
 import { PageHeader, DataTableActions, SearchBar, useResponsivePagination } from '../../components/common'
 import type { Barang } from '../../types'
 
